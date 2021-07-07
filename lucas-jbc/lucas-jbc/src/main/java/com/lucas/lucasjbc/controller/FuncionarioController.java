@@ -7,6 +7,8 @@ import com.lucas.lucasjbc.repository.FuncionarioRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class FuncionarioController {
 
@@ -47,6 +49,16 @@ public class FuncionarioController {
         repositoryFuncionario.addFuncionario(funcionario);
         repositoryFuncionario.addFuncionario(funcionario1);
         repositoryFuncionario.addFuncionario(funcionario2);
+
+        System.out.println("Buscar Funcionario x");
+
+
+        List<Funcionario> all = repositoryFuncionario.findAll();
+        for (Funcionario loop:all
+             ) {
+            System.out.println(loop.getNome() + " " +  loop.getTipo());
+
+        }
 
 
     }

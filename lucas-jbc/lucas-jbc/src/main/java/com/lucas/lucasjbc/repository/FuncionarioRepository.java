@@ -3,10 +3,9 @@ package com.lucas.lucasjbc.repository;
 import com.lucas.lucasjbc.Analista;
 import com.lucas.lucasjbc.domain.Funcionario;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FuncionarioRepository {
 
@@ -88,6 +87,53 @@ public class FuncionarioRepository {
 
 
     }
+
+    public List<Funcionario> findAll() {
+        List<Funcionario> FindFuncionario = new ArrayList<>();
+
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+
+
+            Class.forName("org.h2.Driver");
+            connection = DriverManager.getConnection(
+                    "jdbc:h2:mem:testdb",
+                    "admin",
+                    "123456"
+            );
+
+            statement = connection.createStatement();
+
+            String FindFuncionariosql = "select * from funcionario";
+
+            resultSet = statement.executeQuery(FindFuncionariosql);
+
+            while (resultSet.next()) {
+                String nome = resultSet.getString("nome");
+                String tipo = resultSet.getString("tipo");
+
+
+               Funcionario funcionario = new Analista(nome, tipo, 0,0);
+
+                FindFuncionario.add(funcionario);
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        } finally {
+            try {
+                resultSet.close();
+                statement.close();
+                connection.close();
+            } catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+        }
+
+        return FindFuncionario;
+    }
+
 }
 
 

@@ -8,6 +8,9 @@ public class Analista extends Funcionario {
         super(nome, tipo, valorHora, horasTrabalhadas);
     }
 
+
+
+
     @Override
     public Double CalcularSalario() {
 

@@ -7,6 +7,10 @@ public abstract class Funcionario {
     private double valorHora;
     private double horasTrabalhadas;
 
+    public Funcionario() {
+
+    }
+
     public String getNome() {
         return nome;
     }
